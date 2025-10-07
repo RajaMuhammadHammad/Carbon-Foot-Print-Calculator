@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Emissions Calculator | Professional & Corporate Solutions</title>
+    <link rel="stylesheet" href="static\style.css">
+    <style>
+        /* Instructions Section Styles */
+        .instructions-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instructions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .instructions-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #22c55e;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .instructions-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            border-radius: 2px;
+        }
+
+        .instructions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .instruction-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(34, 197, 94, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instruction-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .instruction-card:hover::before {
+            left: 100%;
+        }
+
+        .instruction-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(34, 197, 94, 0.5);
+            box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+        }
+
+        .instruction-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .instruction-card h3 {
+            color: #22c55e;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .instruction-card p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .instruction-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0 0;
+        }
+
+        .instruction-card ul li {
+            color: #94a3b8;
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .instruction-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        /* Proceed Section */
+        .proceed-section {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 3rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 20px;
+            border: 2px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .proceed-title {
+            font-size: 1.8rem;
+            color: #e2e8f0;
+            margin-bottom: 2rem;
+        }
+
+        /* Animated Arrow */
+        .animated-arrow {
+            display: inline-block;
+            margin: 2rem 0;
+            animation: bounce 2s infinite;
+        }
+
+        .animated-arrow svg {
+            width: 60px;
+            height: 60px;
+            fill: #22c55e;
+            filter: drop-shadow(0 5px 15px rgba(34, 197, 94, 0.5));
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .scope1-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scope1-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .scope1-button:hover::before {
+            left: 100%;
+        }
+
+        .scope1-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(34, 197, 94, 0.6);
+        }
+
+        .scope1-button::after {
+            content: ' 🚀';
+            margin-left: 0.5rem;
+        }
+
+        /* Decorative background elements */
+        .instructions-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .instructions-title {
+                font-size: 2rem;
+            }
+
+            .instruction-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .instructions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proceed-title {
+                font-size: 1.4rem;
+            }
+
+            .scope1-button {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Carbon Emission Calculator</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#how-to-use">How to Use</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#scope">Emission Scopes</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="floating-element">🌍</div>
+        <div class="floating-element">📊</div>
+        <div class="floating-element">⚡</div>
+        
+        <div class="hero-content">
+            <h1>Professional Carbon Emissions Calculator</h1>
+            <p class="subtitle">Comprehensive GHG Assessment for Corporate Excellence</p>
+            <p class="description">
+                Calculate and track your organization's complete carbon footprint across all three emission scopes. 
+                Built for professionals, designed for compliance, powered by EPA and DEFRA emission factors.
+            </p>
+            <a href="#how-to-use" class="cta-button">Learn How to Use</a>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="instructions-section" id="how-to-use">
+        <div class="instructions-container">
+            <h2 class="instructions-title">📋 How to Use the Calculator</h2>
+            
+            <div class="instructions-grid">
+                <div class="instruction-card">
+                    <div class="instruction-number">1</div>
+                    <h3>🎯 Select Your Scope</h3>
+                    <p>Begin by choosing the emission scope you want to calculate:</p>
+                    <ul>
+                        <li><strong>Scope 1:</strong> Direct emissions (fuel combustion, vehicles)</li>
+                        <li><strong>Scope 2:</strong> Purchased electricity emissions</li>
+                        <li><strong>Scope 3:</strong> Value chain emissions (suppliers, products)</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-number">2</div>
+                    <h3>📂 Choose Categories</h3>
+                    <p>Within each scope, select the relevant categories for your organization:</p>
+                    <ul>
+                        <li>Stationary Combustion (boilers, generators)</li>
+                        <li>Mobile Combustion (company vehicles)</li>
+                        <li>Fugitive Emissions (refrigerants, leaks)</li>
+                        <li>Multiple categories can be selected one by one</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-number">3</div>
+                    <h3>📊 Enter Data</h3>
+                    <p>Input your activity data accurately:</p>
+                    <ul>
+                        <li>Select fuel types or energy sources</li>
+                        <li>Enter consumption quantities</li>
+                        <li>Choose appropriate units (liters, kWh, kg, etc.)</li>
+                        <li>Add multiple entries for different sources</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-number">4</div>
+                    <h3>🔄 Process Multiple Categories</h3>
+                    <p>For comprehensive assessment:</p>
+                    <ul>
+                        <li>Complete one category at a time</li>
+                        <li>Navigate to next category after calculation</li>
+                        <li>Progress through Scope 1 → Scope 2 → Scope 3</li>
+                        <li>Each scope builds on the previous results</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-number">5</div>
+                    <h3>✅ Review & Calculate</h3>
+                    <p>Verify your inputs before calculation:</p>
+                    <ul>
+                        <li>Double-check all quantities and units</li>
+                        <li>Review selected emission factors</li>
+                        <li>Click "Calculate" to process emissions</li>
+                        <li>Results show individual and total emissions</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-number">6</div>
+                    <h3>📈 Generate Reports</h3>
+                    <p>Access your comprehensive results:</p>
+                    <ul>
+                        <li>View detailed breakdown by scope and category</li>
+                        <li>Download professional reports</li>
+                        <li>Export data for compliance reporting</li>
+                        <li>Track emissions over time</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Proceed Section -->
+            <div class="proceed-section">
+                <h3 class="proceed-title">Ready to Calculate Your Carbon Footprint?</h3>
+                <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 1rem;">
+                    Start with Scope 1 emissions - your direct emissions from owned or controlled sources
+                </p>
+                
+                <div class="animated-arrow">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                        <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" transform="rotate(90 12 12)"/>
+                    </svg>
+                </div>
+                
+                <a href="{{ url_for('scope1', category='Stationary Combustion') }}" class="scope1-button">
+                    Proceed to Scope 1
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose Our Calculator</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="feature-icon">📈</span>
+                <h3>Comprehensive Scope Coverage</h3>
+                <p>Calculate emissions across all three scopes with detailed breakdowns for each category and source.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3>Industry Standards</h3>
+                <p>Built on EPA USEEIO, EPA GHG Hub, and DEFRA emission factors for accurate and compliant reporting.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3>Professional Reports</h3>
+                <p>Generate detailed reports suitable for sustainability reporting, compliance, and stakeholder communication.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🔄</span>
+                <h3>Value Chain Analysis</h3>
+                <p>Understand your complete environmental impact including upstream and downstream activities.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">💼</span>
+                <h3>Corporate Ready</h3>
+                <p>Designed for enterprise use with bulk data import, team collaboration, and audit trails.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon">🎯</span>
+                <h3>Reduction Opportunities</h3>
+                <p>Identify key areas for emissions reduction and track progress toward sustainability goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scope Information -->
+    <section class="scope-info" id="scope">
+        <div class="scope-container">
+            <h2 class="section-title">Understanding Emission Scopes</h2>
+            <div class="scope-grid">
+                <div class="scope-card">
+                    <div class="scope-number">Scope 1</div>
+                    <h3>Direct Emissions</h3>
+                    <p>Direct greenhouse gas emissions from sources owned or controlled by your organization, including fuel combustion in boilers, furnaces, and vehicles. These are emissions you have direct control over.</p>
+                </div>
+                <div class="scope-card">
+                    <div class="scope-number">Scope 2</div>
+                    <h3>Indirect Energy Emissions</h3>
+                    <p>Indirect emissions from purchased electricity, steam, heat, or cooling. While these emissions occur at the generation facility, they're attributed to your organization based on energy consumption.</p>
+                </div>
+                <div class="scope-card">
+                    <div class="scope-number">Scope 3</div>
+                    <h3>Value Chain Emissions</h3>
+                    <p>All other indirect emissions in your value chain - from purchased goods and services to end-of-life treatment. Often representing the majority of total emissions, covering 15 GHG Protocol categories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .scope-card, .instruction-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Parallax effect on floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const floatingElements = document.querySelectorAll('.floating-element');
+            
+            floatingElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

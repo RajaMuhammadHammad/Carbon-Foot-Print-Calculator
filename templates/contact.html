@@ -1,0 +1,700 @@
+<div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="LinkedIn"><span>💼</span></a>
+                        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Carbon Emissions Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0e1a;
+            min-height: 100vh;
+            color: #e2e8f0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        body > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 14, 26, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #22c55e;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            max-width: 1400px;
+            margin: 140px auto 80px;
+            padding: 0 20px;
+        }
+
+        .contact-hero {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #22c55e, #10b981, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .contact-hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        /* Image Side */
+        .contact-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            aspect-ratio: 1/1;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 
+                0 40px 80px rgba(34, 197, 94, 0.25),
+                0 0 0 1px rgba(34, 197, 94, 0.1);
+            border: 4px solid rgba(34, 197, 94, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        .image-wrapper:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 50px 100px rgba(34, 197, 94, 0.35),
+                0 0 0 1px rgba(34, 197, 94, 0.3);
+            border-color: rgba(34, 197, 94, 0.4);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-decoration {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            border: 3px solid rgba(34, 197, 94, 0.15);
+            border-radius: 40px;
+            top: -10%;
+            left: -10%;
+            z-index: -1;
+            animation: pulseRing 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { 
+                transform: scale(1); 
+                opacity: 0.6; 
+            }
+            50% { 
+                transform: scale(1.08); 
+                opacity: 0.2; 
+            }
+        }
+
+        /* Contact Info Side */
+        .contact-info {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 40px;
+            padding: 3.5rem;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            animation: fadeInRight 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.05), transparent);
+            transition: left 1s;
+        }
+
+        .contact-info:hover::before {
+            left: 100%;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .contact-info h2 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .info-item {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.4));
+            padding: 1.8rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(34, 197, 94, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .info-item:hover::before {
+            left: 100%;
+        }
+
+        .info-item:hover {
+            border-color: rgba(34, 197, 94, 0.5);
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 
+                0 10px 30px rgba(34, 197, 94, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.6));
+        }
+
+        .info-item h3 {
+            color: #22c55e;
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 600;
+        }
+
+        .info-item p, .info-item a {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .info-item a {
+            display: block;
+            transition: all 0.3s;
+            position: relative;
+            padding-left: 5px;
+        }
+
+        .info-item a::before {
+            content: '→';
+            position: absolute;
+            left: -15px;
+            opacity: 0;
+            transition: all 0.3s;
+            color: #22c55e;
+        }
+
+        .info-item a:hover {
+            color: #22c55e;
+            padding-left: 20px;
+        }
+
+        .info-item a:hover::before {
+            left: 0;
+            opacity: 1;
+        }
+
+        .info-icon {
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.5));
+        }
+
+        /* Social Media */
+        .social-media {
+            margin-top: 2.5rem;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(16, 185, 129, 0.05));
+            border-radius: 20px;
+            border: 1px solid rgba(34, 197, 94, 0.1);
+        }
+
+        .social-media h3 {
+            color: #22c55e;
+            margin-bottom: 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(34, 197, 94, 0.3);
+            transition: all 0.5s;
+            transform: translate(-50%, -50%);
+        }
+
+        .social-link:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3), rgba(16, 185, 129, 0.3));
+            border-color: #22c55e;
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 
+                0 15px 35px rgba(34, 197, 94, 0.4),
+                0 0 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .social-link span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* What Sets Us Apart */
+        .highlights {
+            margin-top: 3rem;
+            padding-top: 2.5rem;
+            border-top: 2px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .highlights h3 {
+            color: #22c55e;
+            margin-bottom: 1.8rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .highlights h3::before {
+            content: '✨';
+            font-size: 1.5rem;
+        }
+
+        .highlights ul {
+            list-style: none;
+        }
+
+        .highlights li {
+            color: #cbd5e1;
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+            margin-left: 1rem;
+        }
+
+        .highlights li:hover {
+            color: #e2e8f0;
+            padding-left: 2.5rem;
+            border-left-color: #22c55e;
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .highlights li:hover::before {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.8));
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .contact-hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 1.2rem;
+                font-size: 0.95rem;
+            }
+
+            .contact-info {
+                padding: 2.5rem;
+            }
+
+            .image-wrapper {
+                max-width: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                margin-top: 120px;
+            }
+
+            .contact-hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-hero p {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                padding: 1.8rem;
+            }
+
+            .contact-info h2 {
+                font-size: 1.8rem;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+
+            .info-item {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .navbar {
+                padding: 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Carbon Emission Calculator</div>
+            <ul class="nav-links">
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-hero">
+            <h1>🌱 Get in Touch</h1>
+            <p>Ed-Watch helps leadership teams navigate the complexities of sustainability and digital transformation. Reach out to us for customized advisory and learning programs.</p>
+        </div>
+
+        <div class="contact-container">
+            <!-- Image Side -->
+            <div class="contact-image">
+                <div class="image-decoration"></div>
+                <div class="image-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 600'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f0f0f0'/%3E%3Cstop offset='100%25' style='stop-color:%23ffffff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23bg)' width='400' height='600'/%3E%3C!-- Lightbulb --%3E%3Cellipse cx='200' cy='320' rx='100' ry='130' fill='%23e8e8e8' opacity='0.5'/%3E%3Cellipse cx='200' cy='300' rx='90' ry='110' fill='%23ffffff' stroke='%23d0d0d0' stroke-width='3'/%3E%3C!-- Bulb reflection --%3E%3Cellipse cx='180' cy='280' rx='30' ry='40' fill='%23ffffff' opacity='0.6'/%3E%3C!-- Bulb base --%3E%3Crect x='175' y='390' width='50' height='30' fill='%23c0c0c0'/%3E%3Crect x='170' y='420' width='60' height='10' fill='%23a0a0a0'/%3E%3C!-- Soil --%3E%3Cellipse cx='200' cy='440' rx='80' ry='20' fill='%234a4a4a'/%3E%3C!-- Plant stem --%3E%3Cpath d='M 200 430 Q 190 380 185 340 Q 180 300 190 270' stroke='%2344aa44' stroke-width='4' fill='none'/%3E%3C!-- Leaves --%3E%3Cellipse cx='190' cy='350' rx='25' ry='15' fill='%2355cc55' transform='rotate(-30 190 350)'/%3E%3Cellipse cx='185' cy='320' rx='28' ry='16' fill='%2344bb44' transform='rotate(20 185 320)'/%3E%3Cellipse cx='190' cy='290' rx='22' ry='14' fill='%2355cc55' transform='rotate(-25 190 290)'/%3E%3Cellipse cx='195' cy='360' rx='24' ry='15' fill='%2344bb44' transform='rotate(35 195 360)'/%3E%3Cellipse cx='185' cy='380' rx='26' ry='15' fill='%2355cc55' transform='rotate(-20 185 380)'/%3E%3Cellipse cx='192' cy='270' rx='20' ry='12' fill='%2344bb44' transform='rotate(15 192 270)'/%3E%3C/svg%3E" alt="Sustainable Growth">
+                </div>
+            </div>
+
+            <!-- Contact Info Side -->
+            <div class="contact-info">
+                <h2>Connect With Us</h2>
+
+                <div class="info-item">
+                    <h3><span class="info-icon">🌐</span> Website</h3>
+                    <a href="https://www.ed-watch.org" target="_blank">www.ed-watch.org</a>
+                </div>
+
+                <div class="info-item">
+                    <h3><span class="info-icon">📧</span> Email</h3>
+                    <a href="mailto:shahzad@ed-watch.org">shahzad@ed-watch.org</a>
+                    <a href="mailto:contact@ed-watch.org">contact@ed-watch.org</a>
+                </div>
+
+                <div class="info-item">
+                    <h3><span class="info-icon">📱</span> Phone</h3>
+                    <a href="tel:+19178934606">+1 (917) 893-4606</a>
+                    <a href="tel:+19293612818">+1 (929) 361-2818</a>
+                </div>
+
+                <div class="social-media">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="LinkedIn">💼</a>
+                        <a href="#" class="social-link" title="Facebook">📘</a>
+                        <a href="#" class="social-link" title="YouTube">📺</a>
+                        <a href="#" class="social-link" title="Twitter">🐦</a>
+                        <a href="#" class="social-link" title="Website">🌐</a>
+                    </div>
+                </div>
+
+                <div class="highlights">
+                    <h3>What Sets Us Apart?</h3>
+                    <ul>
+                        <li>Executive & Board advisory with in-depth needs assessment</li>
+                        <li>Customized programs tailored to your business</li>
+                        <li>Specialized support in ESG, climate & carbon markets</li>
+                        <li>Global standards with regional expertise</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.5)';
+            } else {
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            }
+        });
+    </script>
+</body>
+</html>
