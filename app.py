@@ -59,7 +59,7 @@ def scope1():
                         qty_val = float(qty)
                         factor = fuel["units"].get(unit)
                         if factor and qty_val > 0:
-                            emission = qty_val * factor
+                            emission = round(qty_val * factor, 2)
                             results.append({
                                 "category": cat_name,
                                 "item": name,
@@ -82,7 +82,7 @@ def scope1():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * fuel["emission_factor"]
+                                emission = round(qty_val * fuel["emission_factor"], 2)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -104,7 +104,7 @@ def scope1():
                     try:
                         qty_val = float(qty)
                         if qty_val > 0:
-                            emission = qty_val * chem["emission_factor"]
+                            emission = round(qty_val * chem["emission_factor"])
                             results.append({
                                 "category": cat_name,
                                 "item": name,
@@ -126,7 +126,7 @@ def scope1():
                     try:
                         qty_val = float(qty)
                         if qty_val > 0:
-                            emission = qty_val * process["emission_factor"]
+                            emission = round(qty_val * process["emission_factor"])
                             results.append({
                                 "category": cat_name,
                                 "item": name,
@@ -139,6 +139,9 @@ def scope1():
                     except ValueError:
                         continue
 
+
+
+        total_emission = round(total_emission, 2)
         # Save Scope 1 results to session for summary
         session["scope1_results"] = results
         session["scope1_total"] = total_emission
@@ -168,7 +171,7 @@ def scope2():
                     qty_val = float(qty)
                     factor = scope2_data[country]["factor"]
                     unit = scope2_data[country]["unit"]
-                    emission = qty_val * factor
+                    emission = round(qty_val * factor, 2)
                     results.append({
                         "country": country,
                         "unit": unit,
@@ -181,6 +184,8 @@ def scope2():
                     continue
 
          # Save Scope 2 to session for summary
+        
+        total_emission = round(total_emission, 2)
         session["scope2_results"] = results
         session["scope2_total"] = total_emission
 
@@ -217,7 +222,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -244,7 +249,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -271,7 +276,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -298,7 +303,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -325,7 +330,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -352,7 +357,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -379,7 +384,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -406,7 +411,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -435,7 +440,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -465,7 +470,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -494,7 +499,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -525,7 +530,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -554,7 +559,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -581,7 +586,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -610,7 +615,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -636,7 +641,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = qty_val * factor
+                                emission = round(qty_val * factor)
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -648,6 +653,8 @@ def scope3():
                                 total_emission += emission
                         except ValueError:
                             continue
+
+        total_emission = round(total_emission, 2)                
                 # -------- Store Results --------
         session["scope3_results"] = results
         session["scope3_total"] = total_emission
