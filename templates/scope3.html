@@ -329,15 +329,29 @@ function addItem(select, sectionId) {
     const rowId = "row_" + sectionId + "_" + val.replace(/\s+/g, '_');
     if (document.getElementById(rowId)) return;
 
-    const unit = select.options[select.selectedIndex].dataset.unit || '';
-    const factor = select.options[select.selectedIndex].dataset.factor || '';
+    const option = select.options[select.selectedIndex];
+    const factors = option.dataset.factors ? JSON.parse(option.dataset.factors) : null;
+
+    let unitSelectHTML = '';
+    if (factors) {
+        unitSelectHTML = `<select name="unit_${val}" required>`;
+        unitSelectHTML += `<option value="">-- Select Unit --</option>`;
+        for (const [unit, factor] of Object.entries(factors)) {
+            unitSelectHTML += `<option value="${unit}" data-factor="${factor}">${unit}</option>`;
+        }
+        unitSelectHTML += `</select>`;
+    } else {
+        const unit = option.dataset.unit || '';
+        const factor = option.dataset.factor || '';
+        unitSelectHTML = `<div class="unit-display">${unit}</div>`;
+    }
 
     let row = document.createElement("div");
     row.className = "input-group";
     row.id = rowId;
     row.innerHTML = `
         <label>${val}</label>
-        <div class="unit-display">${unit}</div>
+        ${unitSelectHTML}
         <input type="number" name="qty_${val}" placeholder="Enter Quantity" min="0" step="0.01">
         <button type="button" class="remove-btn" onclick="removeRow('${rowId}')">Remove</button>
     `;
@@ -398,11 +412,16 @@ function goToSummary() {
                 <select onchange="addItem(this,'{{ cat_id }}')">
                     <option value="">-- Select --</option>
                     {% for item in values %}
-                        {% if item["Product/Service"] %}
+                                            {% if item.get("Product/Service") %}
                             <option value="{{ item['Product/Service'] }}"
-                                data-unit="{{ item['Unit'] }}"
-                                data-factor="{{ item['EmissionFactor'] }}">
+                                data-unit="{{ item.get('Unit', '') }}"
+                                data-factor="{{ item.get('EmissionFactor', '') }}">
                                 {{ item['Product/Service'] }}
+                            </option>
+                        {% elif item.get("Fuel") %}
+                            <option value="{{ item['Fuel'] }}"
+                                data-factors='{{ item["EmissionFactors"] | tojson | safe }}'>
+                                {{ item['Fuel'] }}
                             </option>
                         {% endif %}
                     {% endfor %}

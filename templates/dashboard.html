@@ -282,15 +282,6 @@
         position: relative;
     }
 
-    #threejs-container {
-        width: 100%;
-        height: 100%;
-        border-radius: 12px;
-        overflow: hidden;
-        background: var(--darker-bg);
-        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
-    }
-
     /* Professional Table Styling */
     .table-container {
         flex: 1;
@@ -765,11 +756,37 @@
             </div>
         </div>
 
-        <!-- 3D Top Sources -->
+        <!-- Top Sources Table -->
         <div class="chart-card">
-            <div class="chart-title">🎯 Top Emission Sources (3D Visualization)</div>
-            <div class="chart-content">
-                <div id="threejs-container"></div>
+            <div class="chart-title">🎯 Top Emission Sources</div>
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table class="professional-table">
+                        <thead>
+                            <tr>
+                                <th>Source Name</th>
+                                <th class="text-end">Emission (kg CO₂e)</th>
+                                <th class="text-end">Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           {% for s in top_sources %}
+                             <tr>
+                                <td>{{ s.source }}</td>
+                                <td class="text-end">{{ s.value | round(0) }}</td>
+                                <td class="text-end">{{ ((s.value / overall_total) * 100) | round(1) }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">Total Top Sources</td>
+                                <td class="text-end">{{ (top_sources | map(attribute='value') | sum) | round(0) }}</td>
+                                <td class="text-end">{{ ((top_sources | map(attribute='value') | sum / overall_total) * 100) | round(1) }}%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -852,7 +869,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
     // Data from backend
     const scopeData = {{ chart_data | tojson | safe }};
@@ -946,71 +962,6 @@
                     }
                 }
             }
-        }
-    });
-
-    // 2. 3D Visualization for Top Sources
-    const container = document.getElementById('threejs-container');
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0f1621);
-    
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    camera.position.set(0, 5, 15);
-    camera.lookAt(0, 0, 0);
-    
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    container.appendChild(renderer.domElement);
-    
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(10, 10, 5);
-    scene.add(directionalLight);
-    
-    // Create 3D bars from actual data
-    const colors = [0x00d4aa, 0x11998e, 0x4facfe, 0x00f2fe, 0xf5576c];
-    const maxValue = Math.max(...topSources.map(s => s.value));
-    
-    topSources.forEach((source, index) => {
-        const height = (source.value / maxValue) * 8;
-        const geometry = new THREE.BoxGeometry(1.5, height, 1.5);
-        const material = new THREE.MeshPhongMaterial({ 
-            color: colors[index % colors.length],
-            shininess: 100
-        });
-        const cube = new THREE.Mesh(geometry, material);
-        
-        // Position bars based on number of sources
-        const spacing = 3;
-        const totalWidth = (topSources.length - 1) * spacing;
-        cube.position.x = (index * spacing) - (totalWidth / 2);
-        cube.position.y = height / 2;
-        scene.add(cube);
-        
-        // Add edge lines
-        const edges = new THREE.EdgesGeometry(geometry);
-        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x00d4aa, linewidth: 2 }));
-        line.position.copy(cube.position);
-        scene.add(line);
-    });
-    
-    // Animation
-    function animate() {
-        requestAnimationFrame(animate);
-        scene.rotation.y += 0.005;
-        renderer.render(scene, camera);
-    }
-    animate();
-    
-    // Handle resize
-    window.addEventListener('resize', () => {
-        if (container.clientWidth > 0) {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
         }
     });
 </script>

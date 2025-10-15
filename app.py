@@ -10,15 +10,15 @@ app.secret_key = "secret_key"
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
-# Load Scope 2 JSON
+
 with open(os.path.join(DATA_DIR, "scope2.json"), "r") as f:
     scope2_data = json.load(f)
 
-# Load Scope 1 JSON
+
 with open(os.path.join(DATA_DIR, "scope1.json"), "r") as f:
     data = json.load(f)
 
-# Load Scope 3 JSON
+
 with open(os.path.join(DATA_DIR, "scope3", "scope3.json"), "r") as f:
     scope3_json = json.load(f)
     scope3_data = scope3_json["Scope3"]  
@@ -36,6 +36,20 @@ def home():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+@app.route("/skip_scope1")
+def skip_scope1():
+    session["scope1_total"] = 0.0
+    session["scope1_results"] = []
+    return redirect(url_for("scope2"))
+
+
+@app.route("/skip_scope2")
+def skip_scope2():
+    session["scope2_total"] = 0.0
+    session["scope2_results"] = []
+    return redirect(url_for("scope3"))
+
 
 # -------- SCOPE 1 --------
 @app.route("/scope1", methods=["GET", "POST"])
@@ -222,7 +236,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -249,7 +263,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -276,7 +290,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -303,7 +317,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -330,7 +344,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -357,7 +371,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -384,7 +398,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -411,7 +425,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -440,7 +454,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -470,7 +484,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -499,7 +513,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -530,7 +544,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -559,7 +573,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -586,7 +600,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -615,7 +629,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -641,7 +655,7 @@ def scope3():
                         try:
                             qty_val = float(qty)
                             if qty_val > 0:
-                                emission = round(qty_val * factor)
+                                emission = qty_val * factor
                                 results.append({
                                     "category": cat_name,
                                     "item": name,
@@ -654,7 +668,183 @@ def scope3():
                         except ValueError:
                             continue
 
-        total_emission = round(total_emission, 2)                
+        for category in scope3_data:
+            if category["Category"] == "Fuel- and energy-related activities":
+                cat_name = category["Category"]
+
+                for item in category.get("Fuel- and energy-related activities", []):
+                    fuel_name = item["Fuel"]
+                    factors = item["EmissionFactors"]
+
+                    # User selects a unit (e.g., "litres", "tonnes", "kWh (Net CV)")
+                    selected_unit = request.form.get(f"unit_{fuel_name}")
+                    qty = request.form.get(f"qty_{fuel_name}")
+
+                    if qty and selected_unit and selected_unit in factors:
+                        try:
+                            qty_val = float(qty)
+                            if qty_val > 0:
+                                factor = float(factors[selected_unit])
+                                emission = round(qty_val * factor, 3)
+
+                                results.append({
+                                    "category": cat_name,
+                                    "item": fuel_name,
+                                    "unit": selected_unit,
+                                    "qty": qty_val,
+                                    "factor": factor,
+                                    "emission": emission
+                                })
+                                total_emission += emission
+                        except ValueError:
+                            continue
+
+        # -------- Upstream transportation and distribution --------
+        for category in scope3_data:
+            if category["Category"] == "Upstream transportation and distribution":
+                cat_name = category["Category"]
+                for item in category.get("Upstream transportation and distribution", []):
+                    name = item["Product/Service"]
+                    unit = item["Unit"]
+                    factor = item["EmissionFactor"]
+                    qty = request.form.get(f"qty_{name}")
+
+                    if qty:
+                        try:
+                            qty_val = float(qty)
+                            if qty_val > 0:
+                                emission = qty_val * factor
+                                results.append({
+                                    "category": cat_name,
+                                    "item": name,
+                                    "unit": unit,
+                                    "qty": qty_val,
+                                    "factor": factor,
+                                    "emission": emission
+                                })
+                                total_emission += emission
+                        except ValueError:
+                            continue
+
+
+
+        # --------Waste generated in operations--------
+        for category in scope3_data:
+            if category["Category"] == "Waste generated in operations":
+                cat_name = category["Category"]
+                for item in category.get("Waste generated in operations", []):
+                    name = item["Product/Service"]
+                    unit = item["Unit"]
+                    factor = item["EmissionFactor"]
+                    qty = request.form.get(f"qty_{name}")
+
+                    if qty:
+                        try:
+                            qty_val = float(qty)
+                            if qty_val > 0:
+                                emission = qty_val * factor
+                                results.append({
+                                    "category": cat_name,
+                                    "item": name,
+                                    "unit": unit,
+                                    "qty": qty_val,
+                                    "factor": factor,
+                                    "emission": emission
+                                })
+                                total_emission += emission
+                        except ValueError:
+                            continue
+
+
+        # -------- Business Travel and Employee Commuting --------
+        for category in scope3_data:
+            if category["Category"] == "Business Travel and Employee Commuting":
+                cat_name = category["Category"]
+                for item in category.get("Business Travel and Employee Commuting", []):
+                    name = item["Product/Service"]
+                    unit = item["Unit"]
+                    factor = item["EmissionFactor"]
+                    qty = request.form.get(f"qty_{name}")
+
+                    if qty:
+                        try:
+                            qty_val = float(qty)
+                            if qty_val > 0:
+                                emission = qty_val * factor
+                                results.append({
+                                    "category": cat_name,
+                                    "item": name,
+                                    "unit": unit,
+                                    "qty": qty_val,
+                                    "factor": factor,
+                                    "emission": emission
+                                })
+                                total_emission += emission
+                        except ValueError:
+                            continue
+
+
+
+
+        # -------- Downstream Transportation and Distribution --------
+        for category in scope3_data:
+            if category["Category"] == "Downstream Transportation and Distribution":
+                cat_name = category["Category"]
+                for item in category.get("Downstream Transportation and Distribution", []):
+                    name = item["Product/Service"]
+                    unit = item["Unit"]
+                    factor = item["EmissionFactor"]
+                    qty = request.form.get(f"qty_{name}")
+
+                    if qty:
+                        try:
+                            qty_val = float(qty)
+                            if qty_val > 0:
+                                emission = qty_val * factor
+                                results.append({
+                                    "category": cat_name,
+                                    "item": name,
+                                    "unit": unit,
+                                    "qty": qty_val,
+                                    "factor": factor,
+                                    "emission": emission
+                                })
+                                total_emission += emission
+                        except ValueError:
+                            continue
+
+
+        # -------- Downstream Transportation and Distribution --------
+        for category in scope3_data:
+            if category["Category"] == "End-of-life Treatment of Sold Products":
+                cat_name = category["Category"]
+                for item in category.get("End-of-life Treatment of Sold Products", []):
+                    name = item["Product/Service"]
+                    unit = item["Unit"]
+                    factor = item["EmissionFactor"]
+                    qty = request.form.get(f"qty_{name}")
+
+                    if qty:
+                        try:
+                            qty_val = float(qty)
+                            if qty_val > 0:
+                                emission = qty_val * factor
+                                results.append({
+                                    "category": cat_name,
+                                    "item": name,
+                                    "unit": unit,
+                                    "qty": qty_val,
+                                    "factor": factor,
+                                    "emission": emission
+                                })
+                                total_emission += emission
+                        except ValueError:
+                            continue
+
+
+
+
+
                 # -------- Store Results --------
         session["scope3_results"] = results
         session["scope3_total"] = total_emission
@@ -698,69 +888,64 @@ def summary():
 
 
 
-
-
-
-
-
-
-
-
-
 def aggregate_top_sources():
     """
-    Read the session-stored results from scope1, scope2, scope3,
-    flatten them, sum by “category/item” or whichever grouping,
-    sort descending, pick top 5.
+    Read session-stored results from scope1, scope2, scope3,
+    flatten them, sum by “category/item”, and return top 5 sources.
     """
     all_items = []
     for key in ("scope1_results", "scope2_results", "scope3_results"):
         items = session.get(key, [])
         all_items.extend(items)
+
     agg = {}
     for it in all_items:
         key_name = f"{it.get('category','')} — {it.get('item','')}"
         val = it.get("emission", 0.0)
         agg[key_name] = agg.get(key_name, 0.0) + val
-    # Sort by emission descending
+
     sorted_items = sorted(agg.items(), key=lambda x: x[1], reverse=True)
     top5 = sorted_items[:5]
-    # Convert into list of dicts
     return [{"source": name, "value": value} for name, value in top5]
 
+# ---------------------------------------------------------------------
+# ROUTE: Dashboard
+# ---------------------------------------------------------------------
 @app.route("/dashboard")
 def dashboard():
-    import google.generativeai as genai
-    from google.generativeai import types
-
-    # --- Totals ---
+    # --- Read totals from session safely ---
     total_scope1 = float(session.get("scope1_total") or 0.0)
     total_scope2 = float(session.get("scope2_total") or 0.0)
     total_scope3 = float(session.get("scope3_total") or 0.0)
+
+    # --- Safety reset if skipped or negative ---
+    if total_scope1 < 0:
+        total_scope1 = 0.0
+
     overall_total = total_scope1 + total_scope2 + total_scope3
 
+    # --- Other data ---
     revenue = float(session.get("total_revenue") or 1)
     employees = int(session.get("total_employees") or 1)
     target_emission = float(session.get("target_emission") or 0)
 
     total_tonnes = overall_total / 1000  # Convert kg → tonnes
 
-    # --- Derived Metrics ---
+    # --- Derived metrics ---
     emission_per_revenue = total_tonnes / revenue if revenue > 0 else 0
     emission_per_employee = total_tonnes / employees if employees > 0 else 0
 
-    # --- Chart & Top Sources ---
+    # --- Chart & top sources ---
     chart_data = {
         "labels": ["Scope 1", "Scope 2", "Scope 3"],
         "values": [total_scope1, total_scope2, total_scope3],
     }
     top_sources = aggregate_top_sources()
 
-    # --- Gemini Setup ---
+    # --- Gemini AI analysis ---
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel("models/gemini-2.5-pro")
 
-    # --- Gemini Prompt ---
     prompt = f"""
     You are a sustainability and environmental impact expert.
 
@@ -783,7 +968,6 @@ def dashboard():
     }}
     """
 
-    # --- Try AI Call ---
     try:
         response = model.generate_content(
             prompt,
@@ -792,22 +976,16 @@ def dashboard():
                 top_p=0.9,
             ),
         )
-
         raw = response.text.strip()
 
-        # Clean Markdown formatting if Gemini includes it
         if "```" in raw:
-            raw = raw.split("```")[1]
-            raw = raw.replace("json", "").strip()
+            raw = raw.split("```")[1].replace("json", "").strip()
 
-        # Try to parse JSON
         ai_data = json.loads(raw)
 
     except Exception as e:
         print("⚠️ Gemini AI Error:", e)
-        # --- Fallback text response ---
         try:
-            # Ask again in plain text if JSON fails
             fallback_prompt = f"""
             Give 3 short and clear carbon reduction suggestions for a company
             emitting {total_tonnes:.2f} tonnes CO₂e with a target of {target_emission/1000:.2f} tonnes.
@@ -827,7 +1005,7 @@ def dashboard():
                 ]
             }
 
-    # --- Pass Data to Template ---
+    # --- Pass data to dashboard template ---
     return render_template(
         "dashboard.html",
         total_scope1=total_scope1,
@@ -841,6 +1019,7 @@ def dashboard():
         target_emission=target_emission,
         ai_comparison=ai_data,
     )
+
 
 
 

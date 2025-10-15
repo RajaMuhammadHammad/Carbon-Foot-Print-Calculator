@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -146,28 +146,42 @@
                 font-size:1rem;
                 letter-spacing:0.3px;
             }
-            button,.next-button{
-                width:100%;
-                padding:18px;
+            .button-group{
+                display:flex;
+                gap:12px;
+                justify-content:flex-end;
+            }
+            button,.next-button,.skip-button{
+                padding:14px 32px;
                 background:linear-gradient(135deg,#10b981 0%,#059669 100%);
                 border:none;
-                border-radius:14px;
+                border-radius:10px;
                 color:white;
-                font-size:1.15rem;
+                font-size:0.95rem;
                 font-weight:700;
                 cursor:pointer;
                 transition:all .3s ease;
-                box-shadow:0 6px 20px rgba(16,185,129,0.4);
+                box-shadow:0 4px 15px rgba(16,185,129,0.4);
                 text-transform:uppercase;
-                letter-spacing:1px;
+                letter-spacing:0.5px;
+                white-space:nowrap;
             }
             button:hover,.next-button:hover{
-                transform:translateY(-3px);
-                box-shadow:0 8px 30px rgba(16,185,129,0.6);
+                transform:translateY(-2px);
+                box-shadow:0 6px 20px rgba(16,185,129,0.6);
                 background:linear-gradient(135deg,#059669 0%,#047857 100%);
             }
             button:active,.next-button:active{
-                transform:translateY(-1px);
+                transform:translateY(0);
+            }
+            .skip-button{
+                background:linear-gradient(135deg,#6b7280 0%,#4b5563 100%);
+                box-shadow:0 4px 15px rgba(107,114,128,0.4);
+            }
+            .skip-button:hover{
+                transform:translateY(-2px);
+                box-shadow:0 6px 20px rgba(107,114,128,0.6);
+                background:linear-gradient(135deg,#4b5563 0%,#374151 100%);
             }
             .input-group{
                 background:rgba(15,23,42,0.6);
@@ -208,15 +222,15 @@
             .remove-btn{
                 background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);
                 border:none;
-                border-radius:10px;
+                border-radius:8px;
                 color:white;
-                padding:12px 24px;
+                padding:10px 18px;
                 cursor:pointer;
                 font-weight:700;
                 transition:all .3s ease;
                 box-shadow:0 3px 10px rgba(239,68,68,0.4);
                 text-transform:uppercase;
-                font-size:0.85rem;
+                font-size:0.75rem;
                 letter-spacing:0.5px;
             }
             .remove-btn:hover{
@@ -287,11 +301,10 @@
             }
             .scope2-button{
                 background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
-                margin-top:20px;
             }
             .scope2-button:hover{
                 background:linear-gradient(135deg,#2563eb 0%,#1d4ed8 100%);
-                box-shadow:0 8px 30px rgba(59,130,246,0.6);
+                box-shadow:0 6px 20px rgba(59,130,246,0.6);
             }
         </style>
         <script>
@@ -321,6 +334,10 @@
                 });
             }
 
+            function skipScope1() {
+                window.location.href = '/scope2';
+            }
+
             // For fuels (one by one)
             function addFuel(select, sectionId) {
                 const fuelName = select.value;
@@ -345,30 +362,29 @@
             }
 
             // For vehicles
-// For vehicles
-function addMobile(select, index) {
-    const val = select.value;
-    if (!val) return;
-    const container = document.getElementById("mobileInputs_" + index);
-    
-    // Replace hyphens with spaced hyphens to match backend expectation
-    const formattedName = val.replace(/-/g, ' - ');
-    const rowId = "row_mobile_" + index + "_" + val;
-    
-    if (document.getElementById(rowId)) return;
+            function addMobile(select, index) {
+                const val = select.value;
+                if (!val) return;
+                const container = document.getElementById("mobileInputs_" + index);
+                
+                // Replace hyphens with spaced hyphens to match backend expectation
+                const formattedName = val.replace(/-/g, ' - ');
+                const rowId = "row_mobile_" + index + "_" + val;
+                
+                if (document.getElementById(rowId)) return;
 
-    let row = document.createElement("div");
-    row.className = "input-group";
-    row.id = rowId;
-    row.innerHTML = `
-        <label>${formattedName}</label>
-        <div class="unit-display">Liters</div>
-        <input type="number" name="qty_${formattedName}" placeholder="Enter Quantity" min="0" step="0.01">
-        <button type="button" class="remove-btn" onclick="removeRow('${rowId}')">Remove</button>
-    `;
-    container.appendChild(row);
-    select.value = "";
-}
+                let row = document.createElement("div");
+                row.className = "input-group";
+                row.id = rowId;
+                row.innerHTML = `
+                    <label>${formattedName}</label>
+                    <div class="unit-display">Liters</div>
+                    <input type="number" name="qty_${formattedName}" placeholder="Enter Quantity" min="0" step="0.01">
+                    <button type="button" class="remove-btn" onclick="removeRow('${rowId}')">Remove</button>
+                `;
+                container.appendChild(row);
+                select.value = "";
+            }
 
             // For chemicals
             function addChem(select, index) {
@@ -447,7 +463,10 @@ function addMobile(select, index) {
                         </div>
                     </div>
                     <div class="form-section">
-                        <button type="button" class="next-button" onclick="goToStep2()">Next</button>
+                        <div class="button-group">
+                            <button type="button" onclick="window.location.href='/skip_scope1'">Skip Scope 1</button>
+                            <button type="button" class="next-button" onclick="goToStep2()">Next</button>
+                        </div>
                     </div>
                 </div>
 
@@ -510,12 +529,11 @@ function addMobile(select, index) {
     </div>
     {% endfor %}
 
-
-
-
                     <!-- Submit -->
                     <div class="form-section">
-                        <button type="submit">Calculate Emissions</button>
+                        <div class="button-group">
+                            <button type="submit">Calculate</button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -555,9 +573,11 @@ function addMobile(select, index) {
                         </table>
 
                         <div class="form-section">
-                            <button type="button" class="scope2-button" onclick="goToScope2()">
-                                Continue to Scope 2 →
-                            </button>
+                            <div class="button-group">
+                                <button type="button" class="scope2-button" onclick="goToScope2()">
+                                    Continue to Scope 2 →
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

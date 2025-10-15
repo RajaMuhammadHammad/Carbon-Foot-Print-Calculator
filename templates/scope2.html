@@ -97,11 +97,23 @@
         background: rgba(51, 65, 85, 0.8);
         border: 2px solid rgba(71, 85, 105, 0.5);
         border-radius: 12px;
-        color: #e2e8f0;
+        color: #ffffff;
         padding: 0.75rem 1rem;
         font-size: 1rem;
         transition: all 0.3s ease;
         width: 100%;
+    }
+
+    .form-control::-webkit-outer-spin-button,
+    .form-control::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        color: #ffffff;
+    }
+
+    .form-control[type="number"] {
+        -moz-appearance: textfield;
+        color: #ffffff;
     }
 
     .form-control:focus {
@@ -206,6 +218,26 @@
     .btn-sm {
         padding: 0.4rem 0.8rem;
         font-size: 0.85rem;
+    }
+
+    .btn-secondary {
+        background: linear-gradient(45deg, #6b7280, #4b5563);
+        color: white;
+        box-shadow: 0 8px 25px rgba(107, 114, 128, 0.3);
+        padding: 0.75rem 1.5rem;
+    }
+
+    .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(107, 114, 128, 0.4);
+        scale: 1.02;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+        margin-top: 1.5rem;
     }
 
     /* Enhanced Scope 3 Button */
@@ -349,6 +381,14 @@
         .w-50 {
             width: 100%;
         }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
     }
 
     /* Loading Animation */
@@ -388,7 +428,10 @@
     <!-- Container for chosen countries -->
     <div id="selectedCountries" class="mb-3"></div>
 
-    <button type="submit" class="btn btn-primary">Next</button>
+    <div class="button-group">
+      <button type="button" class="btn btn-secondary" onclick="skipScope2()">Skip Scope 2</button>
+      <button type="submit" class="btn btn-primary">Next</button>
+    </div>
   </form>
 
   <script>
@@ -409,6 +452,10 @@
         input.value = "";
       }
     });
+
+    function skipScope2() {
+          window.location.href = "/skip_scope2";
+    }
   </script>
 
   {% else %}
@@ -430,7 +477,7 @@
     </div>
     {% endfor %}
 
-    <div class="mt-3 text-end">
+    <div class="text-end mt-3">
       <button type="submit" class="btn btn-success">Calculate</button>
     </div>
   </form>
